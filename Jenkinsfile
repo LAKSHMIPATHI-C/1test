@@ -11,7 +11,10 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building HTML file...'
-                bat 'if not exist build mkdir build'
+                bat '''
+                if not exist build mkdir build
+                echo <html><body><h1>Hello Jenkins!</h1></body></html> > build\\index.html
+                '''
             }
         }
 
@@ -32,4 +35,3 @@ pipeline {
         }
     }
 }
-
