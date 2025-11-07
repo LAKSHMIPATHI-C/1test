@@ -1,34 +1,30 @@
 pipeline {
     agent any
-
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/LAKSHMIPATHI-C/1test.git'
+                git 'https://github.com/LAKSHMIPATHI-C/1test.git'
             }
         }
-
         stage('Build') {
             steps {
                 echo 'Building HTML file...'
-                bat 'mkdir build'
-                bat 'copy index.html build\\index.html'
+                bat 'if not exist build mkdir build'
             }
         }
-
         stage('Archive Artifact') {
             steps {
-                archiveArtifacts artifacts: 'build/**', fingerprint: true
+                echo 'Archiving build output...'
+                archiveArtifacts artifacts: '**/build/**', fingerprint: true
             }
         }
     }
-
     post {
-        success {
-            echo '✅ Build completed successfully!'
-        }
         failure {
             echo '❌ Build failed.'
+        }
+        success {
+            echo '✅ Build succeeded.'
         }
     }
 }
