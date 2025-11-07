@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git 'https://github.com/LAKSHMIPATHI-C/1test.git'
+                git 'git branch: 'main', url: 'https://github.com/LAKSHMIPATHI-C/1test.git'
             }
         }
         stage('Build') {
